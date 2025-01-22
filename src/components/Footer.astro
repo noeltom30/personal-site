@@ -1,0 +1,13 @@
+---
+const socials = { "github": "noeltom30", "instagram": "noel_30_tom", "linkedin": "in/noeltom30" };
+---
+
+<footer>
+    {
+        Object.entries(socials).map(([site, username]) => (
+            <a href={`https://${site}.com/${username}`} target="_blank" rel="noopener noreferrer">
+                <i class={`fa-brands fa-${site}`}></i>
+            </a>
+        ))
+    }
+</footer>

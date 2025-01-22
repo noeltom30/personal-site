@@ -1,10 +1,12 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro"
 
+const pageTitle = "About Me"
 ---
-<MainLayout pageTitle = "Welcome">
+<MainLayout pageTitle = {pageTitle}>
+  
   <h1>Hello there!</h1>
-  <h2>Lorem ipsum dolor sit amet consectetur </h2>
+  <h2>I'm Noel</h2>
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ut.
     Omnis labore, nisi at impedit odit quasi neque ipsam suscipit eligendi
@@ -18,4 +20,3 @@ import MainLayout from "../layouts/MainLayout.astro";
     facere dolor?
   </p>
 </MainLayout>
-  

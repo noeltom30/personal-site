@@ -1,0 +1,21 @@
+---
+import BlogPost from "../components/BlogPost.astro";
+import TagList from "../components/TagList.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import Tag from "./tags/[tag].astro";
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
+---
+
+<MainLayout pageTitle="Blog">
+  <h1>My Blog</h1>
+  <ul>
+    {
+      allPosts.map((post: any) => (
+        <BlogPost url = {post.url} title = {post.frontmatter.title}></BlogPost>
+      ))
+    }
+  </ul>
+  <TagList/>
+</MainLayout>

@@ -1,0 +1,13 @@
+---
+import MainLayout from "./MainLayout.astro";
+
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date);
+---
+
+<MainLayout pageTitle = {frontmatter.title}>
+  <h1>{frontmatter.title}</h1>
+  <p>Published on: {date.toLocaleDateString()}</p>
+  <hr>
+  <slot />
+</MainLayout>
