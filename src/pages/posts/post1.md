@@ -4,7 +4,7 @@ date: 2025-01-14
 title: 'Nightime Verbatim.'
 description: 'A review of After Dark by Haruki Murakami'
 author: 'Noel Tom'
-tags: ["review", "literature"]
+tags: ["review", "literature", "random", "word", "that", "im", "using"]
 
 --- 
 

@@ -4,6 +4,7 @@ import MainLayout from "./MainLayout.astro";
 const { frontmatter } = Astro.props;
 ---
 <MainLayout pageTitle = frontmatter.title>
+    
     <h1>{ frontmatter.title }</h1>
     <em>{`Published on ${frontmatter.pubDate}`}</em>
     <slot />

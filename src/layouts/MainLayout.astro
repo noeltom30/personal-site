@@ -1,22 +1,35 @@
 ---
-import Footer from '../components/Footer.astro';
-import Navigation from '../components/Navigation.astro';
-import '../styles/global.css';
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import TagList from "../components/TagList.astro";
+import "../styles/global.css";
 const { pageTitle } = Astro.props;
+const pathMatcher = new RegExp("blog|tags");
+
+const tagListCondition = pathMatcher.exec(Astro.url.pathname);
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" /> <!-- Added fallback icon type -->
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <script src="https://kit.fontawesome.com/a2137a72a9.js" crossorigin="anonymous"></script>
   </head>
-  <body>    
-    <Navigation/> 
-    <div class="content">
-      <slot/>
+  <body>
+    <div class="main-container">
+      <Navigation />
+      <div class="content">
+        <slot />
+      </div>
+      <div class="taglist-container">
+        {tagListCondition && <TagList />}
+      </div>
     </div>
-    <Footer />    
+
+    <Footer />
   </body>
 </html>

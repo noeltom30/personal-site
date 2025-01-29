@@ -1,28 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 html {
     background-color: rgb(0, 0, 0);
-    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
-    color: white;
+    color: rgba(255, 255, 255, 0.993);
     font-family: "Nunito Sans", serif;
-
-}
-
-body {
-    margin: 0 auto;
+    height: 100%;
     width: 100%;
-    max-width: 80ch;
-    padding: 1rem;
-    line-height: 1.5; 
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
 }
-
-.content{
-    
-}
-
-* {
+html *{
     box-sizing: border-box;
 }
 
+body {    
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.main-container{    
+    margin: 0;    
+    min-height: 93%;    
+    line-height: 1.5; 
+    display: flex;   
+
+}
+
+.main-container > *{       
+    border-left: 1px solid rgba(255, 255, 255, 0.255);
+    border-right: 1px solid rgba(255, 255, 255, 0.255);
+}
+body > *{
+    border-left: 1px solid rgba(255, 255, 255, 0.255);
+    border-right: 1px solid rgba(255, 255, 255, 0.255);
+}
+nav{        
+    display: flex;
+    gap: 15px;        
+    flex-direction: column;
+    width: 10%; 
+    font-size: larger;
+    align-items: center;
+    margin-top: 10%;
+}
+.content{
+    width: 60%;
+    padding: 1rem;
+    padding-left: 2rem;
+}
+.taglist-container{
+    width: 30%;
+}
 h1 {
     margin: 1rem 0;
     font-size: 2.5rem;
@@ -30,5 +60,4 @@ h1 {
 a{
     color: aqua;
     text-decoration: none;
-
 }
