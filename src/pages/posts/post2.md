@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/MarkdownLayout.astro
 date: 2025-01-14
-title: 'Nightime Verbatim'
+title: 'Unique Test'
 description: 'A review of After Dark by Haruki Murakami'
 author: 'Noel Tom'
-tags: ["review", "literature", "random", "word", "that", "im", "using"]
+tags: ["unique"]
 
 --- 
 

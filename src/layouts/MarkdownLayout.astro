@@ -6,7 +6,7 @@ const date = new Date(frontmatter.date);
 
 ---
 
-<MainLayout pageTitle = {frontmatter.title}>
+<MainLayout pageTitle = {frontmatter.title} tags= {frontmatter.tags}>
   <h1>{frontmatter.title}</h1>
   <p>Published on: {date.toLocaleDateString()}</p>
   <hr>

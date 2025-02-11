@@ -3,10 +3,10 @@ import Footer from "../components/Footer.astro";
 import Navigation from "../components/Navigation.astro";
 import TagList from "../components/TagList.astro";
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
-const pathMatcher = new RegExp("blog|tags|posts");
+const { pageTitle, tags} = Astro.props;
 
-const tagListCondition = pathMatcher.exec(Astro.url.pathname);
+const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
+
 ---
 
 <html lang="en">
@@ -26,6 +26,7 @@ const tagListCondition = pathMatcher.exec(Astro.url.pathname);
       </div>
       <div class="taglist-container">
         {tagListCondition && <TagList />}
+        {tags && <TagList tags = {tags}/>}
       </div>
     </div>
 
