@@ -10,11 +10,40 @@ const allPosts = Object.values(
 
 <MainLayout pageTitle="Blog">
   <h1>My Blog</h1>
-  <ul>
+
+  <div class="post-list-container">
     {
       allPosts.map((post: any) => (
-        <BlogPost url = {post.url} title = {post.frontmatter.title}></BlogPost>
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={new Date(post.frontmatter.date).toLocaleDateString()}
+        />
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={new Date(post.frontmatter.date).toLocaleDateString()}
+        />
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={new Date(post.frontmatter.date).toLocaleDateString()}
+        />
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={new Date(post.frontmatter.date).toLocaleDateString()}
+        />
       ))
     }
-  </ul>
+  </div>
 </MainLayout>
+<style>
+  .blog-post {
+    background-color: #1a1e1e;
+  }
+</style>

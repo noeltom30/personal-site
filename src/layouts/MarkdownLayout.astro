@@ -3,6 +3,7 @@ import MainLayout from "./MainLayout.astro";
 
 const { frontmatter } = Astro.props;
 const date = new Date(frontmatter.date);
+
 ---
 
 <MainLayout pageTitle = {frontmatter.title}>

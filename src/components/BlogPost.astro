@@ -1,7 +1,40 @@
 ---
-const { url, title } = Astro.props;
+const { url, title, description, date , tags} = Astro.props;
 ---
 
-<li>
-  <a href={url}>{title}</a>
-</li>
+<div class="post">
+  <div class="about-post-wrapper">
+    <h4><a href={url}>{title}</a></h4>
+    <div class="post-description">{description}</div>
+  </div>
+  <div class="date">
+    {date}
+  </div>
+</div>
+<style>
+  
+  .post {
+    background-color: #1a1e1e;
+    display: flex;
+    width: 96%;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  .about-post-wrapper{
+    flex: 5;
+  }
+  .date{
+    flex: 1;
+    text-align: right;
+    margin-right: 5px;
+    
+  }
+  h4 {
+    all: unset;
+    font-size: 1.17em;
+  }
+  .post-description {
+    font-size: 0.9em;
+  }
+</style>
