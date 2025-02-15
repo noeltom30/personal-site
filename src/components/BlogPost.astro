@@ -1,5 +1,5 @@
 ---
-const { url, title, description, date , tags} = Astro.props;
+const { url, title, description, date} = Astro.props;
 ---
 
 <div class="post">
@@ -7,13 +7,18 @@ const { url, title, description, date , tags} = Astro.props;
     <h4><a href={url}>{title}</a></h4>
     <div class="post-description">{description}</div>
   </div>
+  {date &&
   <div class="date">
     {date}
   </div>
+  }
 </div>
 <style>
   
   .post {
+    display: flex;
+    align-items: center;
+    height: 10vh;
     background-color: #1a1e1e;
     display: flex;
     width: 96%;
@@ -32,9 +37,14 @@ const { url, title, description, date , tags} = Astro.props;
   }
   h4 {
     all: unset;
-    font-size: 1.17em;
+    font-size: 1.3em;
   }
   .post-description {
-    font-size: 0.9em;
+    font-size: 1em;
+  }
+  @media only screen and (max-width: 600px) {
+    .post{
+      height: 12vh;
+    }    
   }
 </style>

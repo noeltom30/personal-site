@@ -1,7 +1,7 @@
-<!-- ---
+---
+import ThemeSettter from "../components/ThemeSettter.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import { Debug } from "astro:components";
-
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
 );
@@ -11,10 +11,9 @@ const uniqueTags = [
 ---
 
 <MainLayout>
-  <h3>Tags</h3>
-  <ul>
-    {uniqueTags.map((tag) => <li>{tag}</li>)}
-    <Debug answer={uniqueTags} />
-    <Debug answer={allPosts} />
-  </ul>
-</MainLayout> -->
+  <ThemeSettter/>
+</MainLayout>
+
+<style>
+  
+</style>

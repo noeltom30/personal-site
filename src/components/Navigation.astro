@@ -1,21 +1,86 @@
 ---
 
 ---
+
+<div class="hamburger">☰</div>
 <nav>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-    <a href="/projects/">Projects</a>
+  <a href="/about/">About</a>
+  <a href="/blog/">Blog</a>
+  <a href="/projects/">Projects</a>
 </nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector("nav");
+
+    if (hamburger && nav) {
+      hamburger.addEventListener("click", function (event) {
+        nav.classList.toggle("open");
+
+        hamburger.textContent = nav.classList.contains("open") ? "X" : "☰";
+
+        event.stopPropagation();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          nav.classList.contains("open") &&
+          !nav.contains(event.target as Node) &&
+          !hamburger.contains(event.target as Node)
+        ) {
+          nav.classList.remove("open");
+          hamburger.textContent = "☰";
+        }
+      });
+    }
+  });
+</script>
 <style>
-    nav{
+  nav {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    width: 15%;
+    font-size: 1.5rem;
+    align-items: center;
+    padding-top: 10%;
+    padding-bottom: 15px;
+  }
+  .hamburger {
+    display: none;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 2vw;
+    z-index: 123;
+  }
+  @media only screen and (max-width: 600px) {
+    nav {
       display: flex;
-      gap: 15px;
       flex-direction: column;
-      width: 15%;
-      font-size: 1.5rem;
-      align-items: center;
-      padding-top: 10%;
-    }    
+      width: 100vw;
+      position: absolute;
+      background: black;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      border-bottom: solid white 2px;
+
+      transition:
+        max-height 0.5s ease-in-out,
+        opacity 0.3s ease-in-out;
+    }
+
+    nav.open {
+      max-height: 500px; /* make sure it fits the content */
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: block;
+    }
+  }
 </style>
-
-
