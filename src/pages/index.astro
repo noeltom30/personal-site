@@ -1,7 +1,12 @@
 ---
 import Navigation from "../components/Navigation.astro";
-import "../styles/global.css";
 import "../styles/index.css";
+// import "../styles/index2.css";
+const socials = {
+  github: "noeltom30",
+  instagram: "noel_30_tom",
+  linkedin: "in/noeltom30",
+};
 ---
 
 <html lang="en">
@@ -16,19 +21,29 @@ import "../styles/index.css";
       crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="content">
-      <div class="name-container">
-        <div class="name">
-          <p>NOEL TOM</p>
-        </div>
-      </div>
+    <main>
+      <div class="name-container">NOEL TOM</div>
       <div class="divider"></div>
-      <div class="nav-container">
+      
+      <nav>
         <a href="/about/">About</a>
         <a href="/blog/">Blog</a>
         <a href="/projects/">Projects</a>
-        <!-- <a href="/projects/">Projects</a> -->
+      </nav>
+      <div class="divider" id="dividertwo"></div>
+      <div class="socials">
+        {
+          Object.entries(socials).map(([site, username]) => (
+            <a
+              href={`https://${site}.com/${username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class={`fa-brands fa-${site}`}/>
+            </a>
+          ))
+        }
       </div>
-    </div>
+    </main>
   </body>
 </html>

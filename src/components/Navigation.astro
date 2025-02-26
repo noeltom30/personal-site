@@ -2,6 +2,7 @@
 
 ---
 
+<div class="nav-overlay"></div>
 <div class="hamburger">☰</div>
 <nav>
   <a href="/about/">About</a>
@@ -12,28 +13,31 @@
   document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     const nav = document.querySelector("nav");
+    const overlay = document.querySelector(".nav-overlay");
 
-    if (hamburger && nav) {
+    if (hamburger && nav && overlay) {
       hamburger.addEventListener("click", function (event) {
         nav.classList.toggle("open");
-
-        hamburger.textContent = nav.classList.contains("open") ? "X" : "☰";
-
+        overlay.classList.toggle("open");
+        hamburger.textContent = nav.classList.contains("open") ? "" : "☰";
         event.stopPropagation();
       });
 
-      document.addEventListener("click", (event) => {
+      document.addEventListener("click", (event: MouseEvent) => {
+      if (event.target instanceof Node) {
         if (
           nav.classList.contains("open") &&
-          !nav.contains(event.target as Node) &&
-          !hamburger.contains(event.target as Node)
+          !nav.contains(event.target) &&
+          !hamburger.contains(event.target)
         ) {
           nav.classList.remove("open");
+          overlay.classList.remove("open");
           hamburger.textContent = "☰";
         }
-      });
-    }
-  });
+      }
+    });
+  }
+});
 </script>
 <style>
   nav {
@@ -46,6 +50,7 @@
     padding-top: 10%;
     padding-bottom: 15px;
   }
+
   .hamburger {
     display: none;
     color: white;
@@ -57,30 +62,56 @@
     right: 2vw;
     z-index: 123;
   }
-  @media only screen and (max-width: 600px) {
-    nav {
-      display: flex;
-      flex-direction: column;
-      width: 100vw;
-      position: absolute;
-      background: black;
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      border-bottom: solid white 2px;
 
-      transition:
-        max-height 0.5s ease-in-out,
-        opacity 0.3s ease-in-out;
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 121;
+  }
+
+  .nav-overlay.open {
+    display: block;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      width: auto;
+      min-width: 200px; 
+      position: fixed; 
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); 
+      background: black;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 20px;
+      gap: 15px;
+      opacity: 0;
+      z-index: 122; 
+      transition: opacity 0.3s ease-in-out;
+    }
+    nav:first-child{
+      margin-top: 20px;
+    }
+    nav:last-child{
+      margin-bottom: 20px;
     }
 
     nav.open {
-      max-height: 500px; /* make sure it fits the content */
+      display: flex;
       opacity: 1;
     }
 
     .hamburger {
       display: block;
+      top: 15px;
     }
   }
 </style>
