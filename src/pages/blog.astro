@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
 );
+import "../styles/global.css"
 ---
 
 <MainLayout pageTitle="Blog">

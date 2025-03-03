@@ -30,14 +30,6 @@ body {
     display: flex;       
 }
 
-/* .main-container > *{       
-    border-left: 1px solid rgba(255, 255, 255, 0.255);
-    border-right: 1px solid rgba(255, 255, 255, 0.255);
-} */
-/* body > *{
-    border-left: 1px solid rgba(255, 255, 255, 0.255);
-    border-right: 1px solid rgba(255, 255, 255, 0.255);
-} */
 nav{        
     display: flex;
     gap: 15px;        
