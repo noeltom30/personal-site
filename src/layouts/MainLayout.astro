@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Navigation from "../components/Navigation.astro";
 import TagList from "../components/TagList.astro";
-import "../styles/global.css";
+// import "../styles/global.css";
 const { pageTitle, tags} = Astro.props;
 
 const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
@@ -15,6 +15,7 @@ const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
     <title>{pageTitle}</title>
     <script src="https://kit.fontawesome.com/a2137a72a9.js" crossorigin="anonymous"></script>
   </head>
