@@ -64,6 +64,8 @@ h1 {
 }
 a{
     color: #00bcd4;
+    /* color: gold; */
+
     text-decoration: none;
     width: fit-content;
 
@@ -76,6 +78,7 @@ nav a{
 }
 a:hover {
     color: rgb(41, 243, 255);
+    /* color: gold; */
     transform: scale(1.05);
 }
 

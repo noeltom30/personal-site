@@ -46,6 +46,8 @@ main {
 
 a {
     color: #00bcd4;
+    /* color: gold; */
+
     text-decoration: none;
     width: fit-content;
     font-size: clamp(1.5rem, 2vw, 2rem);
@@ -55,6 +57,8 @@ a {
 
 a:hover {
     color: rgb(41, 243, 255);
+    /* color: gold; */
+
     transform: scale(1.05);
 }
 nav{
