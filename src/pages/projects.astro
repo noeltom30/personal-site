@@ -1,7 +1,7 @@
 ---
+import "../styles/global.css"
 import BlogPost from "../components/BlogPost.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import "../styles/global.css"
 
 ---
 
@@ -11,9 +11,10 @@ import "../styles/global.css"
   <div class="post-list-container">
         <BlogPost url = `https://github.com/noeltom30/personal-site` title = "This Website" description =`"Minimalism is a ploy by Big Small to sell us more less"`/>        
   </div>
+  <style>
+    .blog-post {
+      background-color: #1a1e1e;
+    }
+  </style>
 </MainLayout>
-<style>
-  .blog-post {
-    background-color: #1a1e1e;
-  }
-</style>
+

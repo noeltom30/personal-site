@@ -1,10 +1,10 @@
 ---
+import "../styles/global.css";
 import BlogPost from "../components/BlogPost.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
 );
-import "../styles/global.css"
 ---
 
 <MainLayout pageTitle="Blog">
@@ -23,9 +23,9 @@ import "../styles/global.css"
       ))
     }
   </div>
+  <style>
+    .blog-post {
+      background-color: #1a1e1e;
+    }
+  </style>
 </MainLayout>
-<style>
-  .blog-post {
-    background-color: #1a1e1e;
-  }
-</style>
