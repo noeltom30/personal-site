@@ -3,21 +3,28 @@ import Footer from "../components/Footer.astro";
 import Navigation from "../components/Navigation.astro";
 import TagList from "../components/TagList.astro";
 import "../styles/global.css";
-const { pageTitle, tags} = Astro.props;
+const { pageTitle, tags } = Astro.props;
 
 const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
-
 ---
 
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
     <title>{pageTitle}</title>
-    <script src="https://kit.fontawesome.com/a2137a72a9.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/a2137a72a9.js"
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="main-container">
@@ -27,10 +34,10 @@ const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
       </div>
       <div class="taglist-container">
         {tagListCondition && <TagList />}
-        {tags && <TagList tags = {tags}/>}
+        {tags && <TagList tags={tags} />}
       </div>
     </div>
 
-    <Footer />    
+    <Footer />
   </body>
 </html>
