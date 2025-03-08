@@ -12,6 +12,7 @@ body {
     margin: 0;
     text-align: center;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
@@ -28,12 +29,12 @@ main {
 
 .divider {
     border-top: 1px solid white;
-    width: 0;
+    width: 70%;
     margin: 20px 0;
-    animation: divider 0.8s forwards;
+    /* animation: divider 0.8s forwards; */
     
 }
-@keyframes divider {
+/* @keyframes divider {
     from{
         width: 0;
     }
@@ -41,7 +42,7 @@ main {
         width: 70%;
     }
     
-}
+} */
 
 a {
     color: #00bcd4;
