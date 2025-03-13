@@ -13,38 +13,3 @@ const { url, title, description, date} = Astro.props;
   </div>
   }
 </div>
-<style>
-  
-  .post {
-    display: flex;
-    align-items: center;
-    height: 10vh;
-    background-color: #1a1e1e;
-    display: flex;
-    width: 96%;
-    padding: 12px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  .about-post-wrapper{
-    flex: 5;
-  }
-  .date{
-    flex: 1;
-    text-align: right;
-    margin-right: 5px;
-    
-  }
-  h4 {
-    all: unset;
-    font-size: 1.3em;
-  }
-  .post-description {
-    font-size: 1em;
-  }
-  @media only screen and (max-width: 600px) {
-    .post{
-      height: auto;
-    }    
-  }
-</style>
