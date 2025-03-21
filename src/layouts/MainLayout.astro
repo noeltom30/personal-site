@@ -1,11 +1,8 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navigation from "../components/Navigation.astro";
-import TagList from "../components/TagList.astro";
 import "../styles/global.css";
 const { pageTitle, tags } = Astro.props;
-
-const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
 ---
 
 <html lang="en">
@@ -13,7 +10,7 @@ const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap"
       rel="stylesheet"
     />
     <meta charset="utf-8" />
@@ -27,17 +24,16 @@ const tagListCondition = new RegExp("blog|tags").exec(Astro.url.pathname);
       crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="main-container">
-      <Navigation />
-      <div class="content">
-        <slot />
+    <div class="wrapper">
+      <div class="main-container">
+        <div class="navigation-wrapper">
+          <Navigation />
+        </div>
+        <div class="content">
+          <slot />
+        </div>
       </div>
-      <div class="taglist-container">
-        {tagListCondition && <TagList />}
-        {tags && <TagList tags={tags} />}
-      </div>
+      <Footer />
     </div>
-
-    <Footer />
   </body>
 </html>

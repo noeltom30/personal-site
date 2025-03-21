@@ -1,6 +1,7 @@
 ---
 // import "../styles/global.css";
 import BlogPost from "../components/BlogPost.astro";
+import TagList from "../components/TagList.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
@@ -8,9 +9,9 @@ const allPosts = Object.values(
 ---
 
 <MainLayout pageTitle="Blog">
-  <h1>Blog</h1>
+  <h1><span class="highlight">Blog</span></h1>
   <p>Not everyone should have their own podcast, blog maybe.</p>
-
+  <TagList/>
   <div class="post-list-container">
     {
       allPosts.map((post: any) => (
@@ -23,9 +24,7 @@ const allPosts = Object.values(
       ))
     }
   </div>
-  <style>
-    .blog-post {
-      background-color: #1a1e1e;
-    }
-  </style>
+</slot>
+
+
 </MainLayout>

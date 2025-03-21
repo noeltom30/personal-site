@@ -1,12 +1,30 @@
 ---
-
+const url = Astro.url.pathname;
 ---
 
-<div class="nav-overlay"></div>
-<div class="hamburger">☰</div>
 <nav>
-  <a href="/about/">About</a>
-  <a href="/blog/">Blog</a>
-  <a href="/projects/">Projects</a>
+  <a class={url.includes("about") ? "active" : ""} href="/about/">About</a>
+  <a class={url.includes("blog") ? "active" : ""} href="/blog/">Blog</a>
+  <a class={url.includes("projects") ? "active" : ""} href="/projects/">Projects</a>
 </nav>
+<script>
+  
+</script>
+<style>
+  nav{
+    display: flex;    
+    gap: 20px;
+  }
+  nav a{
+    display: block;
+    font-size: 1.4rem;    
+  }
+  nav a.active{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-color: white;
+    text-decoration-thickness: 2px;
+    
+  }
+</style>
 

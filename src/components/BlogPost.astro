@@ -1,15 +1,45 @@
 ---
-const { url, title, description, date} = Astro.props;
+const { url, title, description, date } = Astro.props;
 ---
 
 <div class="post">
-  <div class="about-post-wrapper">
-    <h4><a href={url}>{title}</a></h4>
+  <div class="post-content-wrapper">
+    <a class = "post-title" href={url}>{title}</a>
     <div class="post-description">{description}</div>
   </div>
-  {date &&
-  <div class="date">
-    {date}
-  </div>
-  }
+  {date && <div class="date">{date}</div>}
 </div>
+<style>
+  .post {
+    background-color: #111; 
+    padding: 17px;
+    border-radius: 10px;    
+    margin-top: 20px;
+    max-width: 100%; 
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .post-title {
+    font-size: 22px;
+    color: #40bfff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .post-title:hover {
+    text-decoration: underline;
+  }
+
+  .post-description {
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 8px;
+  }
+
+  .post-date {
+    font-size: 14px;
+    color: #aaa; /* Subtle color for date */
+  }
+</style>

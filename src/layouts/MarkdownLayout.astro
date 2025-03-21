@@ -1,4 +1,5 @@
 ---
+import TagList from "../components/TagList.astro";
 import MainLayout from "./MainLayout.astro";
 
 const { frontmatter } = Astro.props;
@@ -7,8 +8,10 @@ const date = new Date(frontmatter.date);
 ---
 
 <MainLayout pageTitle = {frontmatter.title} tags= {frontmatter.tags}>
-  <h1>{frontmatter.title}</h1>
+  <h1><span class="underline">{frontmatter.title}</span></h1>
   <p>Published on: {date.toLocaleDateString()}</p>
+  <TagList tags = {frontmatter.tags}/>
   <hr>
   <slot />
+  <hr>
 </MainLayout>
