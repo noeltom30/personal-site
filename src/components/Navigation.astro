@@ -4,7 +4,7 @@ const url = Astro.url.pathname;
 
 <nav>
   <a class={url.includes("about") ? "active" : ""} href="/about/">About</a>
-  <a class={url.includes("blog") ? "active" : ""} href="/blog/">Blog</a>
+  <a class={url.includes("blog") || url.includes("tag")? "active" : ""} href="/blog/">Blog</a>
   <a class={url.includes("projects") ? "active" : ""} href="/projects/">Projects</a>
 </nav>
 <script>

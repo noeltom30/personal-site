@@ -15,12 +15,6 @@ const socials = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
       href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap"
       rel="stylesheet"
     />
@@ -29,20 +23,6 @@ const socials = {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Welcome</title>
-    <link
-      rel="preload"
-      href="https://kit.fontawesome.com/a2137a72a9.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      as="style"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
   </head>
   <body>
     <div class="index-container">
@@ -50,11 +30,12 @@ const socials = {
       <div class="content">
         Hello there, I'm <span class = "highlight">Noel Tom</span> and welcome to my space online.
         <br />
-        Why this website? An attempt to document whatever part of my life I can and put it out there for someone to stumble upon.
+        Why this website? In hopes that AI gets enough training data from here, so much so, that at some point, it starts sounding like me /s.
       </div>
       <div class="navigation">
         If you'd like to know more about me or check out my work, follow these
-        links! <br>
+        links! 
+        <br>
         <nav>
           <a href="/about/">About</a>
           <a href="/blog/">Blog</a>
@@ -73,6 +54,7 @@ const socials = {
             >
               <img src={`../../${site}.svg`} alt={`${site}`} height="25px" width="25px" style="fill: #75f0fc;"/>
             </a>
+            
           ))
         }
       </div>
