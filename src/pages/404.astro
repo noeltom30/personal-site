@@ -1,0 +1,53 @@
+---
+import Navigation from "../components/Navigation.astro";
+import "../styles/global.css";
+import "../styles/index.css";
+const socials = {
+  github: "noeltom30",
+  instagram: "noel_30_tom",
+  linkedin: "in/noeltom30",
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Carrois+Gothic&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Page Not Found</title>
+  </head>
+  <body>
+    <div class="index-container">
+      <div class="emoticon">(⊙_⊙;)</div>
+      <div class="content">
+        <span class="highlight"> 404</span>
+      </div>
+      <div class="navigation">
+        <nav>
+          <a href="/about/">About</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/projects/">Projects</a>
+        </nav>
+      </div>
+    </div>
+  </body>
+  <style>
+    .highlight{
+        background-color: rgb(247, 0, 0);
+    }
+    .content{
+        font-size: 4rem;
+    }
+    .navigation a{
+        color: rgb(247, 0, 0);
+    }
+  </style>
+</html>

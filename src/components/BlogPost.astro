@@ -7,11 +7,11 @@ const { url, title, description, date } = Astro.props;
     <a class = "post-title" href={url}>{title}</a>
     <div class="post-description">{description}</div>
   </div>
-  {date && <div class="date">{date}</div>}
+  {date && <div class="date">Published on: <span style="color: #40bfff">{date}</span></div>}
 </div>
 <style>
   .post {
-    background-color: #111; 
+    background-color: #252424; 
     padding: 17px;
     border-radius: 10px;    
     margin-top: 20px;
@@ -37,7 +37,6 @@ const { url, title, description, date } = Astro.props;
     color: #ddd;
     margin-bottom: 8px;
   }
-
   .post-date {
     font-size: 14px;
     color: #aaa; /* Subtle color for date */

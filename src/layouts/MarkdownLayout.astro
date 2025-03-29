@@ -4,14 +4,20 @@ import MainLayout from "./MainLayout.astro";
 
 const { frontmatter } = Astro.props;
 const date = new Date(frontmatter.date);
-
 ---
 
-<MainLayout pageTitle = {frontmatter.title} tags= {frontmatter.tags}>
+<MainLayout pageTitle={frontmatter.title} tags={frontmatter.tags}>
   <h1><span class="underline">{frontmatter.title}</span></h1>
   <p>Published on: {date.toLocaleDateString()}</p>
-  <TagList tags = {frontmatter.tags}/>
-  <hr>
-  <slot />
-  <hr>
+  <TagList tags={frontmatter.tags} />
+  <hr />
+  <div class="blog-text">
+    <slot />
+  </div>
+  <hr />
 </MainLayout>
+<style>
+  .blog-text{
+    line-height: 1.6;
+  }
+</style>

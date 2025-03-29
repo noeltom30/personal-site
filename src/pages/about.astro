@@ -1,43 +1,83 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro"
+import MainLayout from "../layouts/MainLayout.astro";
 
-const pageTitle = "About Me"
+const pageTitle = "About Me";
+
+const API_KEY = import.meta.env.LASTFM_API_KEY;
+const USERNAME = import.meta.env.LASTFM_USER;
+
+const [artists, tracks] = await Promise.all([
+  fetch(
+    `http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+  ),
+  fetch(
+    `http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+  ),
+]);
+
+const artistData = await artists.json();
+const trackData = await tracks.json();
 ---
-<MainLayout pageTitle = {pageTitle}>
-  
+
+<MainLayout pageTitle={pageTitle}>
+  <!-- Add hover to reveal currently listening -->
   <h1><span class="highlight">Hello there!</span></h1>
   <h2><span class="underline">I'm Noel Tom</span></h2>
   <p>
-    A Computer Science Engineering sophomore at Amrita Bangalore. I occasionaly indulge in competetive programming and also sometimes play CTFs. 
+    A Computer Science Engineering sophomore at Amrita Bangalore. I occasionaly
+    indulge in competetive programming and also sometimes play CTFs.
   </p>
   <p>
-    As of late, Productivity apps and concepts have piqued my interest so I will eventually begin working on some sort of a project in that space. Why live, if not to pomodoro your way through any given crisis. 
+    As of late, Productivity apps and concepts have piqued my interest so I will
+    eventually begin working on some sort of a project in that space. All seven
+    of the 'Seven Habits of Highly Effective People', involve using the pomodoro timer I've heard.
   </p>
   <p>
-    I have too many interests and hobbies wrestling for my time, so I choose to be a diplomat and pursue none of them.  
-    Although, I do really, really like keyboards and basketball. I'm a huge Warriors fan and would like to bring to your notice that Steph Curry is the Greatest Shooter of All Time. 
-    <!-- I love learning new languages and skills that have close to zero value in real life, e.g, cardistry, writing with my non dominant hand etc.  -->
+    I have too many interests and hobbies wrestling for my time, so I choose to
+    be a diplomat and pursue none of them. Although, I do really, really like
+    keyboards and basketball. I'm a huge <span class="warriors">Warriors</span> fan
+    and would like to bring to your notice that <span class="warriors"
+      >Steph Curry</span
+    > is the Greatest Shooter of All Time.
   </p>
   <p>
-    I have very strong opinions on music, computer mice, rice and water.
+    I love learning new languages and skills that have close to zero value in
+    real life, e.g, cardistry, writing with my non dominant hand etc.
   </p>
-  <h3><span class = "underline">Some of my Favourite:</span></h3>
-  <p>
-    <ul>
-      <li>
-        Artists: Powfu, BMTH
-      </li>
-      <li>        
-        Movies: Your Name, Interestellar        
-      </li>
-      <li>
-        Books: Kite Runner, Tuesdays with Morrie
-      </li>      
-    </ul>
-  </p> 
-  <!-- add links -->
-   <!-- Tech I Use  -->
-   <div slot="sidebar">    
+  <p>I have very strong opinions on music, computer mice, rice and water.</p>
+  <h3><span class="underline">Some of my Favourite:</span></h3>
+  <div class="favourites">
+    <p>
+      <ul>
+        <li>Artists: Powfu, BMTH</li>
+        <li>Movies: Your Name, Interestellar</li>
+        <li>Books: Kite Runner, Tuesdays with Morrie</li>
+      </ul>
+    </p>
   </div>
-  </MainLayout>
-
+  <h3><span class="underline">Music trends this week:</span></h3>
+  <div class="top-music">
+    <div class="artist-content">
+      <span class="underline-2">Top-Artists:</span>
+    </div>
+    <ol>
+      {
+        artistData.weeklyartistchart.artist
+          .slice(0, 5)
+          .map((item: any, index: Number) => <li>{item.name}</li>)
+      }
+    </ol>
+  </div>
+  <div class="track-content">
+    <span class="underline-2">Top-Tracks:</span>
+  </div>
+  <ol>
+    {
+      trackData.weeklytrackchart.track.slice(0, 5).map((item: any) => (
+        <li>
+          {item.name} - {item.artist["#text"]}{" "}
+        </li>
+      ))
+    }
+  </ol>
+</MainLayout>

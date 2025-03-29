@@ -22,7 +22,7 @@ if (!tags) {
   <div class="tag-container">
     {
       tagsToDisplay.map((tag: unknown, index: number) => (
-        <a href={`../tags/${tag}`} class="tag">
+        <a href={`/tags/${tag}`} class="tag">
           #{tag}{index < tagsToDisplay.length - 1 && ","}
         </a>
       ))
