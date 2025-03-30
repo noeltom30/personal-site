@@ -122,12 +122,15 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
       background-color: #1e1e1e;
       color: white;
       border: 2px solid var(--links);
-      border-radius: 8px;
+      border-radius: 5px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       min-width: 250px;
+      max-width: 300px;
       font-size: 14px;
       line-height: 1.5;      
       left: 50%; 
+      overflow: hidden;
+
 
     }
     .title {
@@ -160,16 +163,21 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     .track-info {
       display: flex;
       flex-direction: column;
-      text-overflow: ellipsis;
+      
     }
 
     .track-name {
+      display: block;
       font-size: 1.2rem;
+      text-overflow: ellipsis;
       color: var(--links);
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 200px;
     }
 
     .artist {
-      font-size: 12px;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
