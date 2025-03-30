@@ -6,17 +6,21 @@ const pageTitle = "About Me";
 const API_KEY = import.meta.env.LASTFM_API_KEY;
 const USERNAME = import.meta.env.LASTFM_USER;
 
-const [artists, tracks] = await Promise.all([
+const [artists, tracks, currentTrack] = await Promise.all([
   fetch(
     `http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
   ),
   fetch(
     `http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
   ),
+  fetch(
+    `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`
+  ),
 ]);
 
 const artistData = await artists.json();
 const trackData = await tracks.json();
+const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
 ---
 
 <MainLayout pageTitle={pageTitle}>
@@ -30,7 +34,8 @@ const trackData = await tracks.json();
   <p>
     As of late, Productivity apps and concepts have piqued my interest so I will
     eventually begin working on some sort of a project in that space. All seven
-    of the 'Seven Habits of Highly Effective People', involve using the pomodoro timer I've heard.
+    of the 'Seven Habits of Highly Effective People', have something to do with
+    using the pomodoro timer I've heard.
   </p>
   <p>
     I have too many interests and hobbies wrestling for my time, so I choose to
@@ -44,7 +49,28 @@ const trackData = await tracks.json();
     I love learning new languages and skills that have close to zero value in
     real life, e.g, cardistry, writing with my non dominant hand etc.
   </p>
-  <p>I have very strong opinions on music, computer mice, rice and water.</p>
+  <div class="hover-container">
+    I have very strong opinions on <span class="hover">music</span>,
+    <div class="hide">
+      <div class="title">Recently played</div>
+      <div class="track-content">
+        <img
+          src={currentTrackData.image[1]["#text"]}
+          alt="album-cover"
+          class="track-cover"
+        />
+        <div class="track-info">
+          <div class="track-name">
+            {currentTrackData.name}
+          </div>
+          <div class="artist">
+            {currentTrackData.artist["#text"]}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  computer mice, rice and water. test
   <h3><span class="underline">Some of my Favourite:</span></h3>
   <div class="favourites">
     <p>
@@ -80,4 +106,86 @@ const trackData = await tracks.json();
       ))
     }
   </ol>
+  <style>
+    .hover-container {
+      display: inline-block;
+      position: relative;
+      cursor: pointer; 
+    }
+
+    .hide {
+      display: none;
+      position: absolute;
+      top: 25px;
+      z-index: 100;
+      padding: 7px;
+      background-color: #1e1e1e;
+      color: white;
+      border: 2px solid var(--links);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      min-width: 250px;
+      font-size: 14px;
+      line-height: 1.5;      
+      left: 50%; 
+
+    }
+    .title {
+      margin: 0;
+      color: rgb(180, 178, 178);
+    }
+    .hover:hover + .hide {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      opacity: 1;
+    }
+    .hover{
+      color: var(--links);
+    }
+    .track-content {
+      display: flex;
+      gap: 12px;
+    }
+
+    .track-cover {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      text-overflow: ellipsis;
+    }
+
+    .track-name {
+      font-size: 1.2rem;
+      color: var(--links);
+    }
+
+    .artist {
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .hide {
+        width: 90%;
+        left: 5%; 
+      }
+
+      .track-cover {
+        width: 50px; 
+        height: 50px;
+      }
+
+      .track-info {
+        gap: 2px;
+      }
+    }
+  </style>
 </MainLayout>
