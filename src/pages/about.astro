@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+// export const prerender = false;
 import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
@@ -9,13 +9,13 @@ const USERNAME = import.meta.env.LASTFM_USER;
 
 const [artists, tracks, currentTrack] = await Promise.all([
   fetch(
-    `http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+    `https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
   ),
   fetch(
-    `http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+    `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
   ),
   fetch(
-    `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`
+    `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`
   ),
 ]);
 
