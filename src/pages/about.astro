@@ -4,24 +4,24 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
 
-const API_KEY = import.meta.env.LASTFM_API_KEY;
-const USERNAME = import.meta.env.LASTFM_USER; 
+// const API_KEY = import.meta.env.LASTFM_API_KEY;
+// const USERNAME = import.meta.env.LASTFM_USER; 
 
-const [artists, tracks, currentTrack] = await Promise.all([
-  fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
-  ),
-  fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
-  ),
-  fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`
-  ),
-]);
+// const [artists, tracks, currentTrack] = await Promise.all([
+//   fetch(
+//     `https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+//   ),
+//   fetch(
+//     `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`
+//   ),
+//   fetch(
+//     `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`
+//   ),
+// ]);
 
-const artistData = await artists.json();
-const trackData = await tracks.json();
-const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
+// const artistData = await artists.json();
+// const trackData = await tracks.json();
+// const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
 ---
 
 <MainLayout pageTitle={pageTitle}>
@@ -53,7 +53,7 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
   <div class="hover-container">
     I have very strong opinions on <span class="hover">music</span>,
     <div class="hide">
-      <div class="title">Recently played</div>
+      <!-- <div class="title">Recently played</div>
       <div class="track-content">
         <img
           src={currentTrackData.image[1]["#text"]}
@@ -62,13 +62,13 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
         />
         <div class="track-info">
           <div class="track-name">
-            {currentTrackData.name}
+            {(currentTrackData.name)?currentTrackData.name:"Didn't work"}
           </div>
           <div class="artist">
             {currentTrackData.artist["#text"]}
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   computer mice, rice and water.
@@ -82,7 +82,7 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
       </ul>
     </p>
   </div>
-  <h3><span class="underline">Music trends this week:</span></h3>
+  <!-- <h3><span class="underline">Music trends this week:</span></h3>
   <div class="top-music">
     <div class="artist-content">
       <span class="underline-2">Top-Artists:</span>
@@ -106,7 +106,7 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
         </li>
       ))
     }
-  </ol>
+  </ol> -->
   <style>
     :root {
       --spacing-small: 7px;
