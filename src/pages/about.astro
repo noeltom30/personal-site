@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
@@ -35,7 +36,7 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     As of late, Productivity apps and concepts have piqued my interest so I will
     eventually begin working on some sort of a project in that space. All seven
     of the 'Seven Habits of Highly Effective People', have something to do with
-    using the pomodoro timer I've heard.
+    using the pomodoro timer, or so I've heard.
   </p>
   <p>
     I have too many interests and hobbies wrestling for my time, so I choose to
@@ -70,7 +71,7 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
       </div>
     </div>
   </div>
-  computer mice, rice and water. test
+  computer mice, rice and water.
   <h3><span class="underline">Some of my Favourite:</span></h3>
   <div class="favourites">
     <p>
@@ -107,10 +108,18 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     }
   </ol>
   <style>
+    :root {
+      --spacing-small: 7px;
+      --spacing-medium: 12px;
+      --border-radius: 5px;
+      --transition-duration: 0.3s;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
     .hover-container {
       display: inline-block;
       position: relative;
-      cursor: pointer; 
+      cursor: pointer;
     }
 
     .hide {
@@ -118,43 +127,48 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
       position: absolute;
       top: 25px;
       z-index: 100;
-      padding: 7px;
+      padding: var(--spacing-small);
       background-color: #1e1e1e;
-      color: white;
       border: 2px solid var(--links);
-      border-radius: 5px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
       min-width: 250px;
       max-width: 300px;
       font-size: 14px;
-      line-height: 1.5;      
-      left: 50%; 
+      line-height: 1.5;
+      left: 50%;
       overflow: hidden;
-
-
+      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+      opacity: 0;
+      transform: translateY(-10px);
     }
+
     .title {
       margin: 0;
       color: rgb(180, 178, 178);
     }
-    .hover:hover + .hide {
+
+    .hover-container:hover .hide {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: var(--spacing-small);
       opacity: 1;
+      transform: translateY(0);
     }
-    .hover{
+
+    .hover {
       color: var(--links);
-    }
+    } 
+
     .track-content {
       display: flex;
-      gap: 12px;
+      gap: var(--spacing-medium);
     }
 
     .track-cover {
       width: 60px;
       height: 60px;
-      border-radius: 4px;
+      border-radius: var(--border-radius);
       object-fit: cover;
       flex-shrink: 0;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -163,7 +177,6 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     .track-info {
       display: flex;
       flex-direction: column;
-      
     }
 
     .track-name {
@@ -183,16 +196,12 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     @media (max-width: 768px) {
       .hide {
         width: 90%;
-        left: 5%; 
+        left: 5%;
       }
 
       .track-cover {
-        width: 50px; 
+        width: 50px;
         height: 50px;
-      }
-
-      .track-info {
-        gap: 2px;
       }
     }
   </style>
