@@ -5,8 +5,7 @@ export async function GET(){
     try{
         const response = await fetch(url,{
             method: "GET",
-            headers: {
-                "Accept": "application/json",
+            headers: {                
                 "User-Agent":"personalwebsite/1.0"
             }
         }
