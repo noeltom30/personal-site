@@ -13,6 +13,7 @@ export async function GET(){
         if(!response.ok){
             console.error(`Error: ${response.status} - ${response.statusText}`)
             console.error("API Key:", import.meta.env.LASTFM_API_KEY);        
+            console.error("User:", import.meta.env.LASTFM_USER);        
             throw new Error(`Failed to fetch: ${response.statusText}`);    
         }
         return response;
