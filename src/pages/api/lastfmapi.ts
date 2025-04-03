@@ -11,8 +11,10 @@ export async function GET(){
             }
         }
         );
-        if(!response.ok)
+        if(!response.ok){
+            console.error(`Error: ${response.status} - ${response.statusText}`)
             throw new Error(`Failed to fetch: ${response.statusText}`);            
+        }
         return response;
     }
     catch(error){
