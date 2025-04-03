@@ -18,9 +18,21 @@ const USERNAME = import.meta.env.LASTFM_USER;
 //   ),
 // ]);
 const artists = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`);
-const tracks = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`);
+const url = `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`;
 const currentTrack = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`);
-
+if(!artists.ok){
+  console.error(`Error: ${artists.status} - ${artists.statusText}`)
+}
+const tracks = await fetch(url, {
+  method: "GET",
+  headers: {
+    "Accept": "application/json",
+    "User-Agent": "personalwebsite/1.0",
+  },
+});
+if(!tracks.ok){
+  console.error(`Error: ${tracks.status} - ${tracks.statusText}`)
+}
 const artistData = await artists.json();
 const trackData = await tracks.json();
 const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
