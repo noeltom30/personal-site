@@ -1,4 +1,5 @@
 ---
+export const prerender = false
 const API_URL = "https://ws.audioscrobbler.com/2.0/";
 const API_KEY = import.meta.env.LASTFM_API_KEY;  
 const url = `${API_URL}?method=user.getrecenttracks&user=noel_30_tom&api_key=${API_KEY}&format=json&limit=1`;
