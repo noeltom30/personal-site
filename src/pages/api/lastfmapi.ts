@@ -12,7 +12,8 @@ export async function GET(){
         );
         if(!response.ok){
             console.error(`Error: ${response.status} - ${response.statusText}`)
-            throw new Error(`Failed to fetch: ${response.statusText}`);            
+            console.error("API Key:", import.meta.env.LASTFM_API_KEY);        
+            throw new Error(`Failed to fetch: ${response.statusText}`);    
         }
         return response;
     }
