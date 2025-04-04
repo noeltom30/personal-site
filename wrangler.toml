@@ -1,1 +1,5 @@
 compatibility_date = "2025-04-04"
+
+[vars]
+LASTFM_API_KEY = "f86bcfee7018d42799d5f47937aee909"
+LASTFM_USER = "noel_30_tom"
