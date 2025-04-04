@@ -1,5 +1,5 @@
-export async function GET() {
-    const API_KEY = context.env.LASTFM_API_KEY; 
+export async function GET(context) {
+    const API_KEY = context.runtime.env.LASTFM_API_KEY; 
     if (!API_KEY) {
         console.error("No api visibility");
         return new Response(JSON.stringify({ error: "API key missing" }), { status: 500 });
