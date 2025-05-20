@@ -1,38 +1,40 @@
 ---
-// export const prerender = false;
 import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
+let currentTrackData = null;
+let artistData = null;
+let trackData = null;
 
-const API_KEY = import.meta.env.LASTFM_API_KEY;
-const USERNAME = import.meta.env.LASTFM_USER; 
-const currentTrack = await fetch('/api/lastfmapi')
-// const artistURl = `https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`;
-// const trackUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=${USERNAME}&api_key=${API_KEY}&limit=5&format=json`;
-// const currentTrackURL =`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`;
-// if(!artists.ok){
-//   console.error(`Error: ${artists.status} - ${artists.statusText}`)
-// }
-// const tracks = await fetch(artistURl, {
-//   method: "GET",
-//   headers: {
-//     "Accept": "application/json",
-//     "User-Agent": "personalwebsite/1.0",
-//   },
-// });
+try {
+  const currentTrack = await fetch(`http://localhost:4321/api/lastfm/recenttrack`).then((response) =>
+    response.json()
+  );
+  currentTrackData = currentTrack?.recenttracks?.track?.[0] ?? null;
+} catch (e) {
+  currentTrackData = null;
+}
 
+try {
+  const track = await fetch(`http://localhost:4321/api/lastfm/toptracks`).then((response) =>
+    response.json()
+  );
+  trackData = track ?? null;
+} catch (e) {
+  trackData = null;
+}
 
-// const artists = 
-// if(!tracks.ok){
-//   console.error(`Error: ${tracks.status} - ${tracks.statusText}`)
-// }
-// const artistData = await artists.json();
-// const trackData = await tracks.json();
-const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
+try {
+  const artist = await fetch(`http://localhost:4321/api/lastfm/topartists`).then((response) =>
+    response.json()
+  );
+  artistData = artist ?? null;
+} catch (e) {
+  artistData = null;
+}
 ---
 
 <MainLayout pageTitle={pageTitle}>
-  <!-- Add hover to reveal currently listening -->
   <h1><span class="highlight">Hello there!</span></h1>
   <h2><span class="underline">I'm Noel Tom</span></h2>
   <p>
@@ -62,19 +64,25 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     <div class="hide">
       <div class="title">Recently played</div>
       <div class="track-content">
-        <img
-          src={currentTrackData.image[1]["#text"]}
-          alt="album-cover"
-          class="track-cover"
-        />
-        <div class="track-info">
-          <div class="track-name">
-            {(currentTrackData.name)?currentTrackData.name:"Didn't work"}
-          </div>
-          <div class="artist">
-            {currentTrackData.artist["#text"]}
-          </div>
-        </div>
+        {
+        currentTrackData
+          ? <>
+              <img
+                src={currentTrackData?.image?.[1]?.["#text"] ?? ""}
+                alt="album-cover"
+                class="track-cover"
+              />
+              <div class="track-info">
+                <div class="track-name">
+                  {currentTrackData?.name ?? "Didn't work"}
+                </div>
+                <div class="artist">
+                  {currentTrackData?.artist?.["#text"] ?? ""}
+                </div> 
+              </div>
+            </>
+          : "Couldn't fetch"
+        }
       </div>
     </div>
   </div>
@@ -96,9 +104,11 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
     </div>
     <ol>
       {
-        artistData.weeklyartistchart.artist
-          .slice(0, 5)
-          .map((item: any, index: Number) => <li>{item.name}</li>)
+        artistData?.weeklyartistchart?.artist
+          ? artistData.weeklyartistchart.artist
+              .slice(0, 5)
+              .map((item: any, index: number) => <li>{item.name}</li>)
+          : <li>Couldn't fetch</li>
       }
     </ol>
   </div>
@@ -107,11 +117,13 @@ const currentTrackData = (await currentTrack.json()).recenttracks.track[0];
   </div>
   <ol>
     {
-      trackData.weeklytrackchart.track.slice(0, 5).map((item: any) => (
-        <li>
-          {item.name} - {item.artist["#text"]}{" "}
-        </li>
-      ))
+      trackData?.weeklytrackchart?.track
+        ? trackData.weeklytrackchart.track.slice(0, 5).map((item: any) => (
+            <li>
+              {item.name} - {item.artist?.["#text"] ?? ""}{" "}
+            </li>
+          ))
+        : <li>Couldn't fetch</li>
     }
   </ol>
   <style>
