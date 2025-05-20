@@ -2,12 +2,14 @@
 import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
+const API_BASE = import.meta.env.PUBLIC_API_BASE || "http://localhost:4321/api/lastfm";
+
 let currentTrackData = null;
 let artistData = null;
 let trackData = null;
 
 try {
-  const currentTrack = await fetch(`http://localhost:4321/api/lastfm/recenttrack`).then((response) =>
+  const currentTrack = await fetch(`${API_BASE}/recenttrack`).then((response) =>
     response.json()
   );
   currentTrackData = currentTrack?.recenttracks?.track?.[0] ?? null;
@@ -16,7 +18,7 @@ try {
 }
 
 try {
-  const track = await fetch(`http://localhost:4321/api/lastfm/toptracks`).then((response) =>
+  const track = await fetch(`${API_BASE}/toptracks`).then((response) =>
     response.json()
   );
   trackData = track ?? null;
@@ -25,7 +27,7 @@ try {
 }
 
 try {
-  const artist = await fetch(`http://localhost:4321/api/lastfm/topartists`).then((response) =>
+  const artist = await fetch(`${API_BASE}/topartists`).then((response) =>
     response.json()
   );
   artistData = artist ?? null;
