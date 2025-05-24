@@ -2,37 +2,33 @@
 import MainLayout from "../layouts/MainLayout.astro";
 
 const pageTitle = "About Me";
-const API_BASE = "https://noeltom.pages.dev/api/lastfm";
 
+// Get the base URL for server-side fetch
+const baseUrl = new URL(Astro.request.url).origin;
+const doFetch = typeof Astro.fetch === 'function' ? Astro.fetch : fetch;
+
+let artistRes, trackRes, recentRes;
+try {
+  [artistRes, trackRes, recentRes] = await Promise.all([
+    doFetch(`${baseUrl}/api/lastfm/topartists`),
+    doFetch(`${baseUrl}/api/lastfm/toptracks`),
+    doFetch(`${baseUrl}/api/lastfm/recenttrack`),
+  ]);
+} catch (e) {
+  artistRes = trackRes = recentRes = { ok: false, json: async () => null };
+}
+
+const artistData = artistRes && artistRes.ok ? await artistRes.json() : null;
+const trackData = trackRes && trackRes.ok ? await trackRes.json() : null;
+const recentData = recentRes && recentRes.ok ? await recentRes.json() : null;
+
+// Parse current track info
 let currentTrackData = null;
-let artistData = null;
-let trackData = null;
-
-try {
-  const currentTrack = await fetch(`${API_BASE}/recenttrack`).then((response) =>
-    response.json()
-  );
-  currentTrackData = currentTrack?.recenttracks?.track?.[0] ?? null;
-} catch (e) {
-  currentTrackData = null;
-}
-
-try {
-  const track = await fetch(`${API_BASE}/toptracks`).then((response) =>
-    response.json()
-  );
-  trackData = track ?? null;
-} catch (e) {
-  trackData = null;
-}
-
-try {
-  const artist = await fetch(`${API_BASE}/topartists`).then((response) =>
-    response.json()
-  );
-  artistData = artist ?? null;
-} catch (e) {
-  artistData = null;
+if (recentData?.recenttracks?.track) {
+  // If track is an array, get the first one
+  currentTrackData = Array.isArray(recentData.recenttracks.track)
+    ? recentData.recenttracks.track[0]
+    : recentData.recenttracks.track;
 }
 ---
 
