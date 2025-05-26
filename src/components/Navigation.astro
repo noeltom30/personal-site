@@ -2,24 +2,21 @@
 const url = Astro.url.pathname;
 ---
 
-<div class="nav-links">
-  <nav>
-    <a class={url.includes("about") ? "active" : ""} href="/about/">About</a>
-    <a
-      class={url.includes("blog") ||
-      url.includes("tag") ||
-      url.includes("posts")
-        ? "active"
-        : ""}
-      href="/blog/">Blog</a
-    >
-    <a class={url.includes("projects") ? "active" : ""} href="/projects/"
-      >Projects</a
-    >
-  </nav>
-</div>
-<script></script>
+<nav class="nav-links">
+  <a class={url.includes("about") ? "active" : ""} href="/about/">About</a>
+  <a
+    class={url.includes("blog") || url.includes("tag") || url.includes("posts") ? "active" : ""}
+    href="/blog/"
+  >Blog</a>
+  <a class={url.includes("projects") ? "active" : ""} href="/projects/">Projects</a>
+</nav>
+
 <style>
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
   nav {
     display: flex;
     gap: 20px;
@@ -27,11 +24,17 @@ const url = Astro.url.pathname;
   nav a {
     display: block;
     font-size: 1.4rem;
+    color: var(--links);
+    transition: color 0.2s;
   }
   nav a.active {
     text-decoration: underline;
     text-underline-offset: 10px;
     text-decoration-color: white;
     text-decoration-thickness: 2px;
+    color: var(--focus-links);
+  }
+  nav a:hover {
+    color: var(--focus-links);
   }
 </style>
