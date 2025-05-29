@@ -4,6 +4,7 @@ const url = Astro.url.pathname;
 
 <div class="nav-links">
   <nav>
+    <a href="/" class="home">Home</a>
     <a class={url.includes("about") ? "active" : ""} href="/about/">About</a>
     <a
       class={url.includes("blog") ||
@@ -18,8 +19,16 @@ const url = Astro.url.pathname;
     >
   </nav>
 </div>
+<hr class="gradient-divider">
+
 <script></script>
 <style>
+  .nav-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
   nav {
     display: flex;
     gap: 20px;
@@ -34,4 +43,5 @@ const url = Astro.url.pathname;
     text-decoration-color: white;
     text-decoration-thickness: 2px;
   }
+
 </style>
