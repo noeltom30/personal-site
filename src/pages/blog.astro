@@ -9,7 +9,10 @@ const allPosts = Object.values(
 ---
 
 <MainLayout pageTitle="Blog">
-  <h1><span class="highlight">Blog</span></h1>
+  <h1 class="blog-title">
+    <span class="highlight">Blog</span>
+    <a href="/rss.xml"><img src="../../rss.svg" height="30px" alt="rss"></a>
+  </h1>
   <p>Not everyone should have their own podcast, blog maybe.</p>
   <TagList/>
   <div class="post-list-container">
@@ -26,6 +29,11 @@ const allPosts = Object.values(
   </div>
 </slot>
 <style>
-
+  .blog-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3em;
+  }
 </style>
 </MainLayout>
