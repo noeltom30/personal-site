@@ -11,6 +11,8 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.3.1",
     "@astrojs/rss": "^4.0.11",
-    "astro": "^5.1.5"
+    "astro": "^5.1.5",
+    "fast-xml-parser": ">=4.5.4"
+
   }
 }
