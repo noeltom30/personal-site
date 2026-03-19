@@ -1,4 +1,5 @@
-compatibility_date = "2026-03-19"
+compatibility_date = "2026-03-17"
+pages_build_output_dir = "./dist"
 
 [vars]
 LASTFM_API_KEY = "f86bcfee7018d42799d5f47937aee909"
