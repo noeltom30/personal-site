@@ -6,12 +6,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.2",
     "@astrojs/rss": "^4.0.17",
     "astro": "^6.0.6",
     "fast-xml-parser": ">=5.4.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.75.0"
   }
 }
