@@ -7,5 +7,5 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: "https://noeltom.pages.dev",
   adapter: cloudflare(),
-  output: 'server'
+  output: 'static'
 });
