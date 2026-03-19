@@ -1,4 +1,5 @@
 import type { APIContext } from "astro";
+import { env } from "cloudflare:workers"
 
 export async function GET(context: APIContext) {
   
@@ -7,8 +8,7 @@ export async function GET(context: APIContext) {
 // const currentTrackURL =`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`;
 
   const method = context.params.lastfm; //name of the dynamic route
-  console.dir(context.locals.runtime.env);
-  const API_KEY = context.locals.runtime.env.LASTFM_API_KEY;
+  const API_KEY = env.LASTFM_API_KEY;
   let apiMethod = "";
   let extraParams = "";
   switch(method){

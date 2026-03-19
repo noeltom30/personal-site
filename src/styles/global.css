@@ -105,7 +105,7 @@ header{
     text-underline-offset: 5px; 
     text-decoration-thickness: 4px;
 }
-.warriors:hover{
+.warriors{
     color: gold;
 }
 /* .hr {
