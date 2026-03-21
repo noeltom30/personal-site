@@ -1,6 +1,8 @@
 {
-	"compatibility_date": "2026-03-19",
-	"compatibility_flags": ["global_fetch_strictly_public"],
+	"compatibility_date": "2026-03-17",
+	"compatibility_flags": [
+		"global_fetch_strictly_public"
+	],
 	"name": "personalwebsite",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
@@ -9,5 +11,13 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "keep_database",
+			"database_name": "keep-database",
+			"database_id": "c9d393cf-646b-42ec-8979-58193223d835",
+			"remote": true
+		}
+	]
 }

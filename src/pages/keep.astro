@@ -1,0 +1,53 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+const pageTitle = "Keep";
+let data;
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    const name = formData.get("name");
+    const message = formData.get("message");
+    console.log(name, message);
+    const apiUrl = new URL("/api/keep", Astro.request.url);
+    const response = await fetch(apiUrl.toString(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, message }),
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`Request failed ${response.status}:${body}`);
+    }
+  } catch (error) {
+    data = {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+const apiUrl = new URL("/api/keep", Astro.request.url);
+const response = await fetch(apiUrl.toString());
+try {
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Request failed ${response.status}:${body}`);
+  }
+  data = await response.json();
+} catch (error) {
+  data = {
+    error: error instanceof Error ? error.message : "Unknown error",
+  };
+}
+---
+
+<MainLayout pageTitle={pageTitle}>
+  <form method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+  <pre>{JSON.stringify({ data }, null, 2)}</pre>
+</MainLayout>
