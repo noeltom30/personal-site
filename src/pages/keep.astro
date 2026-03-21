@@ -1,0 +1,228 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Card from "../components/Card.astro";
+const pageTitle = "Keep";
+let data = [];
+
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    const name = formData.get("name");
+    const message = formData.get("message");
+    console.log(name, message);
+    const apiUrl = new URL("/api/keep", Astro.request.url);
+    const response = await fetch(apiUrl.toString(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, message }),
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`Request failed ${response.status}:${body}`);
+    }
+    return Astro.redirect(new URL(Astro.request.url).pathname);
+  } catch (error) {
+    data = {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+const apiUrl = new URL("/api/keep", Astro.request.url);
+const response = await fetch(apiUrl.toString());
+try {
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Request failed ${response.status}:${body}`);
+  }
+  data = await response.json();
+} catch (error) {
+  data = {
+    error: error instanceof Error ? error.message : "Unknown error",
+  };
+}
+---
+
+<MainLayout pageTitle={pageTitle}>
+  <div class="form-toggle-row">
+    <button
+      class="form-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="keep-form"
+    >
+      Leave a message
+    </button>
+  </div>
+  <div class="message-form" id="keep-form" hidden>
+    <form method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="showcase">
+    {
+      data?.map((entry) => (
+        <Card
+          name={entry.name}
+          message={entry.message}
+          date={entry.created_at.split(" ")[0]}
+        />
+      ))
+    }
+  </div>
+
+  <style>
+
+    .form-toggle-row {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-toggle {
+      font-family: var(--gothic);
+      font-size: 0.95rem;
+      background: transparent;
+      color: var(--links);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .form-toggle:hover {
+      border-color: var(--links);
+      color: var(--links);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .message-form {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 5px;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      padding: 0;
+      transition:
+        max-height 220ms ease,
+        opacity 180ms ease,
+        padding 200ms ease,
+        border-color 200ms ease,
+        background 200ms ease;
+    }
+
+    .message-form.open {
+      max-height: 700px;
+      opacity: 1;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+    }
+
+    form {
+        width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    label {
+      font-family: var(--gothic);
+      color: var(--font-normal);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    input[type="text"],
+    textarea {
+      background-color: #111;
+      color: var(--font-normal);
+      font-family: var(--gothic);
+      font-size: 1rem;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 0.55rem 0.75rem;
+      width: 100%;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: var(--links);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button[type="submit"] {
+      align-self: flex-start;
+      font-family: var(--gothic);
+      font-size: 0.95rem;
+      background-color: transparent;
+      color: var(--links);
+      border: 1px solid var(--links);
+      border-radius: 4px;
+      padding: 0.45rem 1.2rem;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--links);
+      color: black;
+    }
+
+    .showcase {
+      column-count: 1;
+      column-gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .showcase {
+        column-count: 2;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .showcase {
+        column-count: 3;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    if (typeof window !== "undefined") {
+      const toggle = document.querySelector(".form-toggle");
+      const formWrapper = document.querySelector(".message-form");
+
+      if (toggle && formWrapper) {
+        toggle.addEventListener("click", () => {
+          const isOpen = formWrapper.classList.toggle("open");
+          formWrapper.hidden = !isOpen;
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+    }
+  </script>
+</MainLayout>
