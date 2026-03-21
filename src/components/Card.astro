@@ -1,0 +1,70 @@
+---
+const { name, message, date } = Astro.props;
+---
+
+<div class="keep-entry">
+  <div class="keep-entry-info">
+    <p class="keep-entry-name">{name ?? "Missing Name"}</p>
+    <p class="keep-entry-date">{date ?? "Today :)"}</p>
+  </div>
+  <div class="keep-entry-message">
+    {message ?? "Missing Entry"}
+  </div>
+</div>
+
+<style>
+  .keep-entry {
+    padding: 1rem 1.25rem;
+    border-radius: 5px;
+    background: #1c1b1b;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+  }
+
+  .keep-entry + .keep-entry {
+    margin-top: 0.75rem;
+  }
+
+  .keep-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  }
+
+  .keep-entry-info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .keep-entry-name {
+    font-weight: 200;
+    font-size: 1rem;
+    color: var(--links);
+    margin: 0;
+  }
+
+  .keep-entry-date {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 100;
+    color: var(--secondary);
+    white-space: nowrap;
+  }
+
+  .keep-entry-message {
+    margin: 0;
+    font-size: 0.975rem;
+    line-height: 1.5;
+    color: aliceblue;
+    word-break: break-word;
+  }
+</style>
