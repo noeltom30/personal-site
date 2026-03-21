@@ -4,7 +4,7 @@ import { env } from "cloudflare:workers";
 export const GET: APIRoute = async () => {
     
     const db = env.keep_database;
-    const { results } = await db.prepare("Select * from keep").all();
+    const { results } = await db.prepare("Select * from keep order by created_at desc").all();
     return Response.json(results, { status: 200 });
 };
 
