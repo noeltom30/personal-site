@@ -1,17 +1,18 @@
 ---
+export const prerender = true;
 import BlogPost from "../../components/BlogPost.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
   const allPosts = Object.values(
-    import.meta.glob("../posts/*.md", { eager: true })
+    import.meta.glob("../posts/*.md", { eager: true }),
   );
   const uniqueTags = [
     ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
   ];
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post: any) =>
-      post.frontmatter.tags?.includes(tag)
+      post.frontmatter.tags?.includes(tag),
     );
     return {
       params: { tag },
@@ -25,7 +26,9 @@ const { posts } = Astro.props;
 ---
 
 <MainLayout pageTitle={tag}>
-  <div style = "font-size: 1.5rem; margin-top: 30px;">Posts tagged <span class = "highlight">#{tag}</span></div>
+  <div style="font-size: 1.5rem; margin-top: 30px;">
+    Posts tagged <span class="highlight">#{tag}</span>
+  </div>
   <div class="post-list-container">
     {
       posts.map((post: any) => (
